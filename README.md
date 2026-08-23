@@ -1,4 +1,4 @@
-# 🚀 **Enterprise AWS Multi-AZ DevSecOps Platform & Disaster Recovery**
+# 🚀 Enterprise AWS Multi-AZ DevSecOps Platform & Disaster Recovery
 
 [![AWS](https://img.shields.io/badge/AWS-Cloud-232F3E?style=for-the-badge&logo=amazon-web-services&logoColor=white)](https://aws.amazon.com/)
 [![Terraform](https://img.shields.io/badge/Terraform-IaC-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
@@ -8,299 +8,224 @@
 [![Helm](https://img.shields.io/badge/Helm-Packaging-0F1689?style=for-the-badge&logo=helm&logoColor=white)](https://helm.sh/)
 [![ArgoCD](https://img.shields.io/badge/ArgoCD-GitOps-EF7B4D?style=for-the-badge&logo=argo&logoColor=white)](https://argo-cd.readthedocs.io/)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions)
-[![DevSecOps](https://img.shields.io/badge/DevSecOps-Security-red?style=for-the-badge)](https://owasp.org/)
 [![Trivy](https://img.shields.io/badge/Trivy-Security-1904DA?style=for-the-badge)](https://trivy.dev/)
 [![Checkov](https://img.shields.io/badge/Checkov-IaC_Security-6B4FBB?style=for-the-badge)](https://www.checkov.io/)
 [![Prometheus](https://img.shields.io/badge/Prometheus-Monitoring-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)](https://prometheus.io/)
 [![Grafana](https://img.shields.io/badge/Grafana-Observability-F46800?style=for-the-badge&logo=grafana&logoColor=white)](https://grafana.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 ---
 
-## 📌 **Project Overview**
+## 📌 Project Overview
 
-Welcome to the **Enterprise AWS Multi-AZ DevSecOps Platform & Disaster Recovery** project.
+**Enterprise AWS Multi-AZ DevSecOps Platform & Disaster Recovery** is a production-oriented cloud infrastructure project demonstrating the integration of AWS infrastructure, Infrastructure as Code, Kubernetes, CI/CD, DevSecOps, GitOps, observability, and disaster recovery.
 
-This project demonstrates a **production-grade, highly available, secure, cloud-native AWS platform** built using modern **DevOps, DevSecOps, Infrastructure as Code, Kubernetes, GitOps, CI/CD, observability, and disaster recovery practices**.
-
-The platform provides:
+The platform is designed around:
 
 - ☁️ AWS cloud infrastructure
 - 🌐 Multi-AZ networking
 - 🏗️ Terraform Infrastructure as Code
-- ☸️ Amazon EKS Kubernetes platform
-- 🐳 Docker containerization
-- ⛵ Helm application packaging
+- ☸️ Amazon EKS
+- 🐳 Docker containers
+- ⛵ Helm
 - 🔄 ArgoCD GitOps
 - 🚀 GitHub Actions CI/CD
-- 🔐 DevSecOps security automation
-- 🔍 Trivy security scanning
-- 🛡️ Checkov Infrastructure as Code scanning
+- 🔐 DevSecOps security controls
+- 🔍 Trivy vulnerability scanning
+- 🛡️ Checkov IaC security scanning
 - 🗄️ Amazon RDS PostgreSQL
-- 📊 Prometheus monitoring
+- 📊 Prometheus
 - 🚨 Alertmanager
-- 📈 Grafana observability
+- 📈 Grafana
 - ♻️ Multi-region disaster recovery
-- 🧪 Automated validation and testing
-- 📚 Operational documentation and runbooks
-
-The architecture is designed around **repeatability, security, scalability, high availability, automated deployment, continuous monitoring, and disaster recovery**.
 
 ---
 
-## 🏗️ **Architecture**
+# 🏗️ Architecture
 
-```text
-                                  INTERNET
-                                      |
-                                      v
-                         +-------------------------+
-                         |       AWS REGION        |
-                         |        PRIMARY          |
-                         |       ap-south-1        |
-                         +------------+------------+
-                                      |
-                                      v
-                         +-------------------------+
-                         |        AWS VPC           |
-                         |      Multi-AZ Network   |
-                         +------------+------------+
-                                      |
-                    +-----------------+-----------------+
-                    |                 |                 |
-                    v                 v                 v
-              +-----------+     +-----------+     +-----------+
-              |    AZ-1   |     |    AZ-2   |     |    AZ-3   |
-              |           |     |           |     |           |
-              | EKS Nodes |     | EKS Nodes |     | EKS Nodes |
-              | Private   |     | Private   |     | Private   |
-              | Subnets   |     | Subnets   |     | Subnets   |
-              +-----+-----+     +-----+-----+     +-----+-----+
-                    |                 |                 |
-                    +-----------------+-----------------+
-                                      |
-                                      v
-                         +-------------------------+
-                         |       AMAZON EKS        |
-                         |   Kubernetes Platform   |
-                         +------------+------------+
-                                      |
-                 +--------------------+--------------------+
-                 |                    |                    |
-                 v                    v                    v
-          +-------------+      +-------------+      +-------------+
-          | Kubernetes  |      | Kubernetes  |      | Kubernetes  |
-          | Services    |      | Ingress     |      | Workloads   |
-          +------+------+      +------+------+      +------+------+
-                 |                    |                    |
-                 +--------------------+--------------------+
-                                      |
-                                      v
-                         +-------------------------+
-                         |       Amazon RDS         |
-                         |   PostgreSQL Multi-AZ   |
-                         +-------------------------+
+~~~text
+                         ┌─────────────────────┐
+                         │      DEVELOPER      │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │   GITHUB REPOSITORY │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │   GITHUB ACTIONS    │
+                         │       CI / CD       │
+                         └──────────┬──────────┘
+                                    │
+                  ┌─────────────────┼─────────────────┐
+                  │                 │                 │
+                  ▼                 ▼                 ▼
+             Terraform            Trivy            Checkov
+             Validation          Security          IaC Scan
+                  │                 │                 │
+                  └─────────────────┼─────────────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │    DOCKER BUILD     │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │  CONTAINER REGISTRY │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │       ARGOCD        │
+                         │       GITOPS        │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+              ┌──────────────────────────────────────────┐
+              │              AWS PRIMARY REGION           │
+              │                 ap-south-1                │
+              │                                          │
+              │   ┌──────────────────────────────────┐   │
+              │   │               VPC                │   │
+              │   │                                  │   │
+              │   │     AZ-1    AZ-2    AZ-3         │   │
+              │   │      │       │       │           │   │
+              │   │      └───────┼───────┘           │   │
+              │   │              │                   │   │
+              │   │          AMAZON EKS              │   │
+              │   │              │                   │   │
+              │   │    Kubernetes Applications       │   │
+              │   │              │                   │   │
+              │   │      Amazon RDS PostgreSQL       │   │
+              │   │            Multi-AZ              │   │
+              │   └──────────────────────────────────┘   │
+              └──────────────────────┬───────────────────┘
+                                     │
+                                     ▼
+                         ┌─────────────────────┐
+                         │    OBSERVABILITY    │
+                         │ Prometheus + Grafana│
+                         │    + Alertmanager   │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │ DISASTER RECOVERY   │
+                         │   ap-southeast-1    │
+                         └─────────────────────┘
+~~~
 
+## 🧩 Architecture Components
 
-                    GITOPS / CI-CD / DEVSECOPS
-                                      |
-                                      v
-                         +-------------------------+
-                         |    GitHub Repository    |
-                         +------------+------------+
-                                      |
-                                      v
-                         +-------------------------+
-                         |     GitHub Actions      |
-                         +------------+------------+
-                                      |
-                 +--------------------+--------------------+
-                 |                    |                    |
-                 v                    v                    v
-            Terraform              Trivy               Checkov
-            Validation             Scanning             IaC Scan
-                 |                    |                    |
-                 +--------------------+--------------------+
-                                      |
-                                      v
-                                Docker Build
-                                      |
-                                      v
-                              Container Registry
-                                      |
-                                      v
-                                   ArgoCD
-                                      |
-                                      v
-                                Amazon EKS
-
-
-                    DISASTER RECOVERY
-                                      |
-                                      v
-                         +-------------------------+
-                         |     PRIMARY REGION      |
-                         |      ap-south-1         |
-                         +------------+------------+
-                                      |
-                                      | Backup / Recovery
-                                      v
-                         +-------------------------+
-                         |      DR REGION          |
-                         |    ap-southeast-1       |
-                         +------------+------------+
-                                      |
-                                      v
-                           Recovery Infrastructure
-```
-
-### 🧩 **Architecture Components**
-
-| **Layer** | **Components** |
+| Layer | Components |
 |---|---|
 | ☁️ Cloud | AWS |
 | 🌐 Networking | VPC, Public Subnets, Private Subnets, Multi-AZ |
-| 🌍 Availability | Multiple Availability Zones |
-| ⚖️ Traffic | Kubernetes Ingress / AWS Load Balancing |
 | ☸️ Platform | Amazon EKS |
-| 📦 Workloads | Kubernetes Deployments, Services |
 | 🐳 Containers | Docker |
 | ⛵ Packaging | Helm |
 | 🔄 GitOps | ArgoCD |
 | 🚀 CI/CD | GitHub Actions |
+| 🔐 Security | IAM, Trivy, Checkov |
 | 🗄️ Database | Amazon RDS PostgreSQL |
-| 🔑 Identity | AWS IAM |
-| 🔐 Security | Trivy, Checkov, IAM, Security Policies |
-| 📊 Monitoring | Prometheus, Alertmanager, Grafana |
-| ♻️ Disaster Recovery | Multi-Region DR |
-| 🌎 Regions | ap-south-1 → ap-southeast-1 |
+| 📊 Monitoring | Prometheus |
+| 🚨 Alerting | Alertmanager |
+| 📈 Visualization | Grafana |
+| ♻️ Disaster Recovery | Multi-Region |
+| 🌎 Primary Region | `ap-south-1` |
+| 🌎 DR Region | `ap-southeast-1` |
 
 ---
 
-## 🔄 **DevSecOps & GitOps Workflow**
+# 🛠️ Technology Stack
 
-```text
-                              DEVELOPER
-                                  |
-                                  v
-                         +------------------+
-                         | GitHub Repository|
-                         +--------+---------+
-                                  |
-                                  v
-                         +------------------+
-                         | GitHub Actions   |
-                         +--------+---------+
-                                  |
-             +--------------------+--------------------+
-             |                    |                    |
-             v                    v                    v
-       CI Validation        Security Scanning      Build Process
-             |                    |                    |
-             |              +-----+-----+              |
-             |              |           |              |
-             |              v           v              |
-             |            Trivy      Checkov            |
-             |              |           |              |
-             +--------------+-----------+--------------+
-                                  |
-                                  v
-                         +------------------+
-                         | Deployment Ready |
-                         +--------+---------+
-                                  |
-                                  v
-                             ArgoCD GitOps
-                                  |
-                                  v
-                         +------------------+
-                         | Amazon EKS       |
-                         | Kubernetes       |
-                         +--------+---------+
-                                  |
-                                  v
-                         Production Workloads
-                                  |
-                                  v
-                         Amazon RDS PostgreSQL
-```
-
-### 🔁 **Deployment Flow**
-
-1. 👨‍💻 Developer pushes changes to GitHub.
-2. 🚀 GitHub Actions starts the CI/CD workflow.
-3. 🏗️ Terraform configuration is validated.
-4. 🔐 DevSecOps security checks are executed.
-5. 🔍 Trivy performs vulnerability scanning.
-6. 🛡️ Checkov validates Infrastructure as Code security.
-7. 🐳 Container images are built.
-8. ⛵ Helm packages Kubernetes applications.
-9. 🔄 ArgoCD monitors Git repositories.
-10. ☸️ ArgoCD synchronizes workloads to Amazon EKS.
-11. 📊 Prometheus and Grafana provide observability.
-12. ♻️ Disaster-recovery automation supports regional recovery.
-
----
-
-## 🛠️ **Technology Stack**
-
-| **Category** | **Tools / Services** |
+| Category | Technology |
 |---|---|
-| ☁️ **Cloud Platform** | AWS |
-| 🌐 **Networking** | VPC, Multi-AZ, Public & Private Subnets |
-| 🏗️ **Infrastructure as Code** | Terraform |
-| ☸️ **Kubernetes** | Amazon EKS |
-| 🐳 **Containerization** | Docker |
-| ⛵ **Package Management** | Helm |
-| 🔄 **GitOps** | ArgoCD |
-| 🚀 **CI/CD** | GitHub Actions |
-| 🔐 **Security** | Trivy, Checkov, IAM, Security Policies |
-| 📊 **Monitoring** | Prometheus, Alertmanager, Grafana |
-| 🗄️ **Database** | Amazon RDS PostgreSQL |
-| ♻️ **Disaster Recovery** | Multi-Region DR |
-| ⚙️ **Automation** | Bash, Makefile |
-| 🧪 **Testing** | Automated Validation & Test Suites |
-| 🌎 **Environments** | Development, Staging, Production |
+| Cloud Platform | AWS |
+| Infrastructure as Code | Terraform |
+| Networking | Amazon VPC, Multi-AZ |
+| Kubernetes | Amazon EKS |
+| Containers | Docker |
+| Kubernetes Packaging | Helm |
+| GitOps | ArgoCD |
+| CI/CD | GitHub Actions |
+| Container Security | Trivy |
+| IaC Security | Checkov |
+| Identity & Access | AWS IAM |
+| Database | Amazon RDS PostgreSQL |
+| Monitoring | Prometheus |
+| Alerting | Alertmanager |
+| Visualization | Grafana |
+| Automation | Bash / Makefile |
+| Disaster Recovery | Multi-Region AWS |
 
 ---
 
-## ☁️ **AWS Infrastructure**
+# ☁️ AWS Infrastructure
 
-The AWS infrastructure is provisioned and managed using **Terraform**.
+AWS infrastructure is provisioned and managed using Terraform.
 
-### 🏗️ **Infrastructure Components**
+### Core Infrastructure
 
 - 🌐 Amazon VPC
 - 🔀 Multi-AZ networking
 - 🌍 Public and private subnets
 - ☸️ Amazon EKS
-- 💻 EC2 infrastructure
 - 🗄️ Amazon RDS PostgreSQL
-- 🔑 IAM configuration
+- 🔑 AWS IAM
 - 🛡️ Security controls
-- 📊 Monitoring infrastructure
 - 🔗 Kubernetes networking
-- 🌎 Environment-specific infrastructure
-- ♻️ Disaster-recovery infrastructure
+- 📊 Monitoring infrastructure
+- ♻️ Disaster recovery infrastructure
 
-Terraform configurations are organized into reusable modules and environment-specific configurations to improve:
+### Infrastructure Principles
 
-- ♻️ Reusability
-- 🧩 Maintainability
-- 🔐 Security
-- 📈 Scalability
-- 🚀 Deployment consistency
-- 🌎 Environment isolation
+- Infrastructure as Code
+- Modular Terraform design
+- Version-controlled infrastructure
+- Environment separation
+- Repeatable deployments
+- Security-focused configuration
+- High availability
+- Disaster recovery readiness
 
 ---
 
-## 🏗️ **Terraform Infrastructure as Code**
+# 🏗️ Terraform Infrastructure as Code
 
-Terraform is used to define AWS infrastructure declaratively.
+Terraform manages AWS infrastructure declaratively and keeps infrastructure configuration version-controlled.
 
-### 📁 **Terraform Structure**
+### Terraform Workflow
 
-```text
+~~~text
+Terraform Configuration
+          │
+          ▼
+    terraform init
+          │
+          ▼
+     terraform fmt
+          │
+          ▼
+  terraform validate
+          │
+          ▼
+    terraform plan
+          │
+          ▼
+    terraform apply
+          │
+          ▼
+    AWS Infrastructure
+~~~
+
+### Terraform Structure
+
+~~~text
 terraform/
 ├── backend.tf
 ├── main.tf
@@ -314,578 +239,480 @@ terraform/
 │   └── prod/
 │
 └── modules/
-    ├── vpc/
     ├── ec2/
     ├── eks/
     ├── iam/
+    ├── monitoring/
     ├── rds/
-    └── monitoring/
-```
-
-### 🔧 **Terraform Workflow**
-
-```text
-Terraform Configuration
-        |
-        v
-terraform init
-        |
-        v
-terraform fmt
-        |
-        v
-terraform validate
-        |
-        v
-terraform plan
-        |
-        v
-terraform apply
-        |
-        v
-AWS Infrastructure
-```
-
-Terraform enables infrastructure changes to be:
-
-- 📜 Version controlled
-- 🔍 Reviewed through Git
-- ♻️ Reproducible
-- 🧩 Modular
-- 🔐 Security validated
-- 🌎 Environment specific
-- 🚀 Automated through CI/CD
+    └── vpc/
+~~~
 
 ---
 
-## ☸️ **Amazon EKS & Kubernetes**
+# ☸️ Amazon EKS & Kubernetes
 
-Amazon EKS provides the managed Kubernetes platform for running cloud-native workloads.
+Amazon EKS provides the managed Kubernetes platform for running containerized workloads.
 
-### ☸️ **Kubernetes Capabilities**
+### Kubernetes Resources
 
-- 🚀 Kubernetes Deployments
-- 🌐 Services
-- ⚙️ ConfigMaps
-- 🔐 Secrets
-- 🌍 Ingress
-- 📦 Application workloads
-- 🔗 Service networking
-- 📊 Workload monitoring
-- ♻️ Declarative deployments
-- 🛡️ Kubernetes security controls
+- Deployments
+- Services
+- ConfigMaps
+- Secrets
+- Ingress
+- Application workloads
+- Service networking
+- Workload monitoring
+- Declarative configuration
 
 Kubernetes resources are maintained under:
 
-```text
+~~~text
 kubernetes/
-```
+~~~
 
-The EKS infrastructure is provisioned through Terraform while application workloads are deployed through Kubernetes, Helm, and ArgoCD.
+Terraform provisions the EKS infrastructure, while Kubernetes, Helm, and ArgoCD manage application workloads.
 
 ---
 
-## 🐳 **Docker & Containerization**
+# 🐳 Docker & Containerization
 
-Docker is used to package application components into **portable, consistent, and deployable container images**.
+Docker is used to package applications into portable and consistent container images.
 
-### 📦 **Containerization Includes**
+### Container Workflow
 
-- 🐳 Docker build configurations
-- 📦 Container images
-- 💻 Application components
-- ⚙️ Runtime configuration
-- 🔐 Container security scanning
-- 🚀 CI/CD image workflows
-- ☸️ Kubernetes integration
-
-### 🔄 **Container Workflow**
-
-```text
+~~~text
 Application Source
-       |
-       v
-Dockerfile
-       |
-       v
-Docker Build
-       |
-       v
+       │
+       ▼
+   Dockerfile
+       │
+       ▼
+ Docker Build
+       │
+       ▼
 Container Image
-       |
-       v
-Trivy Security Scan
-       |
-       v
+       │
+       ▼
+ Trivy Scan
+       │
+       ▼
 Container Registry
-       |
-       v
-Amazon EKS
-```
+       │
+       ▼
+   Amazon EKS
+~~~
 
-Containerization provides consistent application environments across development, staging, and production workflows.
+### Container Security
+
+Container images are scanned using Trivy before deployment to identify known vulnerabilities.
 
 ---
 
-## ⛵ **Helm Application Packaging**
+# ⛵ Helm
 
-Helm is used to package and manage Kubernetes application deployments.
+Helm provides Kubernetes application packaging and release management.
 
-### 📁 **Helm Structure**
+### Helm Structure
 
-```text
+~~~text
 helm/
 └── production-app/
-```
+~~~
 
-### 🚀 **Helm Capabilities**
+### Helm Responsibilities
 
-- 📦 Kubernetes application packaging
-- ⚙️ Configuration management
-- 🌎 Environment-specific values
-- 🔄 Repeatable deployments
-- ♻️ Release management
-- 🧩 Reusable templates
-- 🎯 Declarative application configuration
+- Kubernetes application packaging
+- Reusable templates
+- Configuration management
+- Environment-specific values
+- Repeatable deployments
+- Release management
 
-Helm works together with **ArgoCD** to provide a GitOps-based Kubernetes deployment model.
+Helm integrates with ArgoCD for GitOps-based application delivery.
 
 ---
 
-## 🔄 **GitOps with ArgoCD**
+# 🔄 GitOps with ArgoCD
 
-ArgoCD provides the GitOps continuous delivery layer for Kubernetes.
+ArgoCD continuously synchronizes the desired Kubernetes state stored in Git with the EKS cluster.
 
-```text
-                         Git Repository
-                               |
-                               v
-                            ArgoCD
-                               |
-                               v
-                    Desired Kubernetes State
-                               |
-                               v
-                         Amazon EKS
-                               |
-                               v
-                    Kubernetes Workloads
-```
+~~~text
+Git Repository
+      │
+      ▼
+    ArgoCD
+      │
+      ▼
+Desired Kubernetes State
+      │
+      ▼
+  Amazon EKS
+      │
+      ▼
+Kubernetes Workloads
+~~~
 
-### 🔁 **GitOps Benefits**
+### GitOps Benefits
 
 - 🔄 Continuous synchronization
-- 📜 Version-controlled deployments
+- 📜 Git-based desired state
 - 🔍 Deployment visibility
-- ↩️ Easier rollback
-- 🔐 Controlled deployment process
-- 🎯 Desired-state management
-- 🚀 Automated application delivery
+- ↩️ Rollback capability
+- 🎯 Declarative deployments
+- 🔐 Controlled application delivery
 
-ArgoCD configuration is maintained under:
+### ArgoCD Structure
 
-```text
+~~~text
 argocd/
 ├── application.yaml
 └── project.yaml
-```
+~~~
 
 ---
 
-## 🚀 **GitHub Actions CI/CD**
+# 🚀 GitHub Actions CI/CD
 
-GitHub Actions provides automated CI/CD workflows for the platform.
+GitHub Actions automates infrastructure validation, security checks, container workflows, and deployment processes.
 
-### 📁 **Workflow Structure**
+### Workflow Structure
 
-```text
+~~~text
 .github/
 └── workflows/
     ├── ci.yml
     ├── cd.yml
     ├── security.yml
     └── disaster-recovery.yml
-```
+~~~
 
-### ⚙️ **Pipeline Responsibilities**
+### CI/CD Responsibilities
 
-- ✅ CI validation
-- 🏗️ Infrastructure validation
-- 🔍 Configuration validation
-- 🔐 Security checks
-- 🐳 Container security scanning
-- 🛡️ IaC security validation
-- 🚀 Continuous delivery
-- ♻️ Disaster-recovery automation
+- Terraform validation
+- Configuration validation
+- Security scanning
+- Container scanning
+- IaC security validation
+- Docker build
+- Deployment automation
+- Disaster recovery automation
 
-### 🔄 **CI/CD Flow**
+### CI/CD Flow
 
-```text
+~~~text
 Developer
-    |
-    v
+    │
+    ▼
 GitHub Repository
-    |
-    v
+    │
+    ▼
 GitHub Actions
-    |
-    +-------------------+
-    |                   |
-    v                   v
-CI Validation      Security Workflow
-    |                   |
-    |              +----+----+
-    |              |         |
-    |              v         v
-    |            Trivy     Checkov
-    |              |         |
-    +--------------+---------+
-                   |
-                   v
-              Deployment
-                   |
-                   v
-                ArgoCD
-                   |
-                   v
-              Amazon EKS
-```
-
----
-
-## 🔐 **Security & DevSecOps**
-
-Security is integrated throughout the infrastructure and application delivery lifecycle.
-
-The project follows a **shift-left DevSecOps approach**, where security validation is performed before infrastructure and application changes reach production.
-
-### 🛡️ **Security Controls**
-
-- 🔐 IAM-based access control
-- 🌐 Network segmentation
-- 🛡️ Infrastructure security policies
-- ☸️ Kubernetes security controls
-- 🐳 Container security
-- 🔍 Trivy vulnerability scanning
-- 🏗️ Checkov Infrastructure as Code scanning
-- 🔑 Secure configuration management
-- 🚀 CI/CD security gates
-- 📜 Security policies
-- 👤 Least-privilege access principles
-
-Security resources are maintained under:
-
-```text
-security/
-├── policies/
-├── sonarqube/
-└── trivy/
-```
-
----
-
-## 🔍 **Security Scanning**
-
-The platform integrates automated security validation into the CI/CD lifecycle.
-
-### 🐳 **Trivy**
-
-Trivy is used for vulnerability scanning of container images and filesystem content.
-
-```text
-Application / Container
-          |
-          v
-        Trivy
-          |
-     +----+----+
-     |         |
-     v         v
-Vulnerability Filesystem
-   Scan         Scan
-     |           |
-     +-----+-----+
-           |
-           v
-     Security Result
-```
-
-### 🏗️ **Checkov**
-
-Checkov is used to validate Infrastructure as Code against security and compliance policies.
-
-```text
-Terraform Code
-      |
-      v
-   Checkov
-      |
-      +---- Security Policies
-      |
-      +---- Misconfiguration Detection
-      |
-      +---- Compliance Checks
-      |
-      v
-Security Validation
-```
-
-Security scanning is integrated into GitHub Actions to identify infrastructure and application security issues before deployment.
-
----
-
-## 📊 **Monitoring & Observability**
-
-The platform contains a dedicated monitoring and observability layer.
-
-```text
+    │
+    ├───────────────┬───────────────┐
+    ▼               ▼               ▼
+Terraform         Trivy          Checkov
+Validation        Scan           IaC Scan
+    │               │               │
+    └───────────────┴───────────────┘
+                    │
+                    ▼
+              Docker Build
+                    │
+                    ▼
+             Container Registry
+                    │
+                    ▼
+                  ArgoCD
+                    │
+                    ▼
                 Amazon EKS
-                    |
-        +-----------+-----------+
-        |                       |
-        v                       v
- Kubernetes Workloads      Infrastructure
-        |                       |
-        +-----------+-----------+
-                    |
-                    v
-                Prometheus
-                    |
-                    v
-              Alertmanager
-                    |
-                    v
-                 Grafana
-                    |
-                    v
-           Operational Visibility
-```
+~~~
 
-### 📈 **Monitoring Components**
+---
 
-- 📊 Prometheus
-- 🚨 Alertmanager
-- 📈 Grafana
-- ☸️ Kubernetes workload metrics
-- ☁️ Infrastructure metrics
-- ❤️ Service health monitoring
-- 🔍 Operational troubleshooting
-- 📈 Performance visibility
+# 🔐 DevSecOps & Security
+
+Security is integrated into the infrastructure and application delivery lifecycle.
+
+### Security Controls
+
+- AWS IAM
+- Least-privilege access
+- Network segmentation
+- Security groups
+- Kubernetes security controls
+- Container vulnerability scanning
+- Infrastructure security scanning
+- CI/CD security gates
+- Secure configuration management
+
+### Security Tools
+
+| Tool | Purpose |
+|---|---|
+| Trivy | Container and filesystem vulnerability scanning |
+| Checkov | Terraform / IaC security validation |
+| AWS IAM | Identity and access control |
+| Security Policies | Infrastructure and workload security |
+
+### DevSecOps Flow
+
+~~~text
+Developer
+    │
+    ▼
+Git Push
+    │
+    ▼
+GitHub Actions
+    │
+    ├───────────────┬───────────────┐
+    ▼               ▼               ▼
+Terraform         Trivy          Checkov
+Validation        Scan           IaC Scan
+    │               │               │
+    └───────────────┴───────────────┘
+                    │
+                    ▼
+              Security Gate
+                    │
+                    ▼
+               Deployment
+~~~
+
+---
+
+# 📊 Monitoring & Observability
+
+The platform uses Prometheus, Alertmanager, and Grafana for operational monitoring and visibility.
+
+~~~text
+AWS Infrastructure
+        │
+        ▼
+    Amazon EKS
+        │
+   ┌────┴────┐
+   ▼         ▼
+Kubernetes  Application
+ Metrics     Metrics
+   │         │
+   └────┬────┘
+        ▼
+   Prometheus
+        │
+        ▼
+  Alertmanager
+        │
+        ▼
+     Grafana
+        │
+        ▼
+Operational Visibility
+~~~
+
+### Observability Capabilities
+
+- Cluster health
+- Kubernetes workload metrics
+- Infrastructure metrics
+- Application metrics
+- Service health
+- Alerting
+- Performance visibility
+- Troubleshooting
 
 Monitoring configuration is maintained under:
 
-```text
+~~~text
 monitoring/
-```
+~~~
 
 ---
 
-## 🗄️ **Amazon RDS PostgreSQL**
+# 🗄️ Amazon RDS PostgreSQL
 
-Amazon RDS PostgreSQL provides the managed database layer for the production platform.
+Amazon RDS PostgreSQL provides the managed database layer for application workloads.
 
-```text
-                 Amazon EKS
-                     |
-                     v
-            Kubernetes Application
-                     |
-                     v
-              Database Service
-                     |
-                     v
-          +-----------------------+
-          | Amazon RDS PostgreSQL |
-          |       Multi-AZ        |
-          +-----------------------+
-                     |
-                     v
-              Persistent Data
-```
+~~~text
+Amazon EKS
+    │
+    ▼
+Kubernetes Application
+    │
+    ▼
+Amazon RDS PostgreSQL
+       Multi-AZ
+    │
+    ▼
+Persistent Application Data
+~~~
 
-The RDS infrastructure is provisioned through Terraform and integrated with the private application/database architecture.
+### Database Architecture
 
-The RDS Terraform module is maintained under:
+- Managed PostgreSQL
+- Private network placement
+- Multi-AZ availability
+- Security-group controlled access
+- Automated backup capability
+- Monitoring integration
+- Disaster recovery integration
 
-```text
+RDS Terraform configuration is maintained under:
+
+~~~text
 terraform/modules/rds/
-```
+~~~
 
 ---
 
-## 🌎 **Multi-AZ High Availability**
+# 🌎 Multi-AZ High Availability
 
-The production platform uses a **Multi-AZ architecture** to improve availability and resilience.
+Production infrastructure is distributed across multiple Availability Zones.
 
-```text
+~~~text
                          AWS VPC
-                            |
-          +-----------------+-----------------+
-          |                 |                 |
-          v                 v                 v
+                            │
+          ┌─────────────────┼─────────────────┐
+          │                 │                 │
+          ▼                 ▼                 ▼
        AZ-1              AZ-2              AZ-3
-          |                 |                 |
+          │                 │                 │
       EKS Nodes         EKS Nodes         EKS Nodes
-          |                 |                 |
-          +-----------------+-----------------+
-                            |
-                            v
-                     Shared Platform
-                            |
-                            v
-                    RDS Multi-AZ
-```
+          │                 │                 │
+          └─────────────────┼─────────────────┘
+                            │
+                            ▼
+                       Amazon EKS
+                            │
+                            ▼
+                     RDS Multi-AZ
+~~~
 
-### 🎯 **High Availability Benefits**
+### High Availability Benefits
 
-- 🔄 Workload distribution across Availability Zones
-- 🛡️ Reduced single-AZ dependency
-- 📈 Improved resilience
-- 🚀 Better production availability
-- 🗄️ Multi-AZ database architecture
-- 🌎 Fault isolation
+- Reduced single-AZ dependency
+- Workload distribution
+- Fault isolation
+- Improved resilience
+- Better production availability
+- Multi-AZ database availability
 
 ---
 
-## ♻️ **Disaster Recovery**
+# ♻️ Disaster Recovery
 
-The project includes a dedicated disaster-recovery architecture designed for **multi-region resilience**.
+The platform includes a secondary AWS region for disaster recovery.
 
-### 🌎 **Regional Topology**
+### Regional Topology
 
-```text
-                 PRIMARY REGION
-                   ap-south-1
-                        |
-                        v
-              +-------------------+
-              | Production AWS    |
-              | Infrastructure    |
-              +---------+---------+
-                        |
-                        v
-                 DR Automation
-                        |
-                        v
-              +-------------------+
-              | Secondary Region  |
-              | ap-southeast-1    |
-              +---------+---------+
-                        |
-                        v
-                 Recovery Platform
-```
+~~~text
+              PRIMARY REGION
+                ap-south-1
+                    │
+                    ▼
+          Production Infrastructure
+                    │
+                    ▼
+             Backup / Recovery
+                    │
+                    ▼
+              DR REGION
+            ap-southeast-1
+                    │
+                    ▼
+          Recovery Infrastructure
+~~~
 
-The disaster recovery design uses:
+| Role | Region |
+|---|---|
+| 🟢 Primary | `ap-south-1` |
+| 🔵 DR | `ap-southeast-1` |
 
-```text
-Primary Region:
-ap-south-1
+### DR Capabilities
 
-DR Region:
-ap-southeast-1
-```
-
-### 🛡️ **DR Capabilities**
-
-- 🌎 Multi-region recovery architecture
-- 🔄 Automated DR workflow
-- 🏗️ Infrastructure restoration
-- 💾 Recovery configuration
-- 🚨 Disaster-recovery validation
-- 📚 Operational runbooks
-- 🏢 Business continuity planning
-- 🔁 Primary-to-secondary recovery procedures
+- Multi-region recovery architecture
+- Infrastructure recreation
+- Recovery automation
+- Backup and recovery procedures
+- DR validation
+- Business continuity support
+- Primary-to-secondary recovery process
 
 DR resources are maintained under:
 
-```text
+~~~text
 disaster-recovery/
-```
-
-and automated through the GitHub Actions DR workflow.
+~~~
 
 ---
 
-## 🧪 **Testing & Validation**
+# 🧪 Testing & Validation
 
 Testing and validation resources are maintained under:
 
-```text
+~~~text
 tests/
-```
+~~~
 
-### ✅ **Validation Areas**
+### Validation Areas
 
-- 🏗️ Terraform validation
-- ☸️ Kubernetes configuration validation
-- ⚙️ Infrastructure validation
-- 🔐 Security validation
-- 🐳 Container validation
-- 🚀 Deployment validation
-- ♻️ Disaster-recovery validation
+- Terraform configuration
+- Kubernetes manifests
+- Infrastructure configuration
+- Security controls
+- Container configuration
+- Deployment configuration
+- Disaster recovery workflows
 
-### 🔧 **Terraform Validation**
+### Terraform Validation
 
-```bash
+~~~bash
 terraform fmt -check -recursive
 terraform validate
-```
+~~~
 
-### ☸️ **Kubernetes Validation**
+### Kubernetes Validation
 
-```bash
+~~~bash
 kubectl get nodes
 kubectl get pods -A
 kubectl get deployments
 kubectl get services
-```
-
-Testing and validation help identify infrastructure, configuration, security, and deployment issues before production changes are promoted.
+kubectl get ingress
+~~~
 
 ---
 
-## 🌎 **Environment Strategy**
+# 🌎 Environment Strategy
 
-The infrastructure is organized into three environments:
+The platform follows environment separation for controlled infrastructure and application delivery.
 
-| **Environment** | **Purpose** |
+| Environment | Purpose |
 |---|---|
-| 🟢 **dev** | Development and infrastructure testing |
-| 🟡 **staging** | Pre-production validation |
-| 🔴 **prod** | Production workloads |
+| 🟢 Development | Development and testing |
+| 🟡 Staging | Pre-production validation |
+| 🔴 Production | Production workloads |
 
-### 🔄 **Environment Flow**
-
-```text
-                     DEVELOPMENT
-                           |
-                           v
-                       STAGING
-                           |
-                           v
-                      PRODUCTION
-                           |
-                           v
-                 DISASTER RECOVERY
-```
-
-Each environment has its own:
-
-- 🏗️ Terraform configuration
-- ⚙️ Environment-specific variables
-- ☸️ Kubernetes configuration
-- 🔧 Deployment configuration
-- ☁️ AWS infrastructure
-- 🔐 Security configuration
-
-Environment isolation helps reduce configuration conflicts and deployment risk.
+~~~text
+Development
+     │
+     ▼
+  Staging
+     │
+     ▼
+ Production
+     │
+     ▼
+ Disaster Recovery
+~~~
 
 ---
 
-## 📂 **Repository Structure**
+# 📂 Repository Structure
 
-```text
+~~~text
 aws-production-devsecops-dr/
 │
 ├── .github/
@@ -896,22 +723,12 @@ aws-production-devsecops-dr/
 │       └── disaster-recovery.yml
 │
 ├── argocd/
-│   ├── application.yaml
-│   └── project.yaml
-│
 ├── disaster-recovery/
-│
 ├── docker/
-│
 ├── docs/
-│
 ├── helm/
-│   └── production-app/
-│
 ├── kubernetes/
-│
 ├── monitoring/
-│
 ├── scripts/
 │
 ├── security/
@@ -940,7 +757,6 @@ aws-production-devsecops-dr/
 │       └── vpc/
 │
 ├── tests/
-│
 ├── .gitignore
 ├── CHANGELOG.md
 ├── LICENSE
@@ -948,520 +764,318 @@ aws-production-devsecops-dr/
 ├── README.md
 ├── SECURITY.md
 └── docker-compose.yml
-```
+~~~
 
 ---
 
-## ⚙️ **Makefile Operations**
+# ⚙️ Makefile Operations
 
-The project provides a Makefile to simplify common infrastructure and DevOps operations.
+The Makefile provides shortcuts for common infrastructure and deployment operations.
 
-### 📋 **View Available Operations**
-
-```bash
+~~~bash
 make help
-```
-
-### 🧹 **Terraform Formatting**
-
-```bash
 make fmt
-```
-
-### ✅ **Validation**
-
-```bash
 make validate
-```
-
-### 🔍 **Security / Quality Checks**
-
-```bash
 make lint
-```
-
-### 📋 **Infrastructure Planning**
-
-```bash
 make plan
-```
-
-### 🚀 **Infrastructure Deployment**
-
-```bash
 make apply
-```
-
-### 🚀 **Application Deployment**
-
-```bash
 make deploy
-```
+~~~
+
+| Command | Purpose |
+|---|---|
+| `make help` | Display available operations |
+| `make fmt` | Format Terraform configuration |
+| `make validate` | Validate infrastructure |
+| `make lint` | Run quality and security checks |
+| `make plan` | Generate Terraform plan |
+| `make apply` | Provision infrastructure |
+| `make deploy` | Deploy application |
 
 ---
 
-## 🚀 **Deployment Workflow**
+# 🚀 Deployment
 
-### 1️⃣ **Validate the Project**
+## 1. Validate Terraform
 
-```bash
+~~~bash
 terraform fmt -check -recursive
 terraform validate
-```
+~~~
 
-The validation process checks Terraform configuration and infrastructure code before deployment.
+## 2. Initialize Terraform
 
-### 2️⃣ **Initialize Terraform**
-
-```bash
+~~~bash
 terraform init
-```
+~~~
 
-### 3️⃣ **Review the Infrastructure Plan**
+## 3. Review Infrastructure
 
-```bash
+~~~bash
 terraform plan
-```
+~~~
 
-### 4️⃣ **Provision AWS Infrastructure**
+## 4. Provision Infrastructure
 
-```bash
+~~~bash
 terraform apply
-```
+~~~
 
-Terraform provisions the required AWS infrastructure including:
+Terraform provisions the required AWS infrastructure.
 
-- 🌐 VPC
-- 🔀 Multi-AZ networking
-- ☸️ EKS
-- 🔑 IAM
-- 💻 EC2
-- 🗄️ RDS
-- 📊 Monitoring resources
+## 5. Configure EKS Access
 
-### 5️⃣ **Configure EKS Access**
-
-```bash
+~~~bash
 aws eks update-kubeconfig \
   --region <AWS_REGION> \
   --name <EKS_CLUSTER_NAME>
-```
+~~~
 
-### 6️⃣ **Verify Kubernetes Cluster**
+## 6. Verify EKS
 
-```bash
+~~~bash
 kubectl get nodes
 kubectl get pods -A
-```
+~~~
 
-### 7️⃣ **Deploy Application**
+## 7. Deploy Applications
 
-Application deployment is managed through:
+Application delivery is managed through:
 
-- ☸️ Kubernetes
-- ⛵ Helm
-- 🔄 ArgoCD
-- 🚀 GitHub Actions
+- Helm
+- ArgoCD
+- Kubernetes
+- GitHub Actions
 
-### 8️⃣ **Verify Application**
+## 8. Verify Deployment
 
-```bash
+~~~bash
 kubectl get deployments
 kubectl get services
 kubectl get ingress
-```
+~~~
 
 ---
 
-## 🔐 **Security Workflow**
+# 🔄 End-to-End Platform Workflow
 
-Security is integrated throughout the software delivery lifecycle.
-
-```text
-                     Developer
-                         |
-                         v
-                  GitHub Repository
-                         |
-                         v
-                  GitHub Actions
-                         |
-          +--------------+--------------+
-          |              |              |
-          v              v              v
-       Checkov         Trivy       Code Quality
-          |              |              |
-          +--------------+--------------+
-                         |
-                         v
-                  Security Gate
-                         |
-                         v
-                    Deployment
-                         |
-                         v
-                      ArgoCD
-                         |
-                         v
-                    Amazon EKS
-```
-
-The security pipeline follows a **shift-left security model**, helping detect vulnerabilities and infrastructure misconfigurations before production deployment.
-
----
-
-## 📊 **Observability Workflow**
-
-```text
-                  AWS Infrastructure
-                          |
-                          v
-                     Amazon EKS
-                          |
-             +------------+------------+
-             |                         |
-             v                         v
-      Kubernetes Metrics       Application Metrics
-             |                         |
-             +------------+------------+
-                          |
-                          v
-                     Prometheus
-                          |
-                          v
-                    Alertmanager
-                          |
-                          v
-                       Grafana
-                          |
-                          v
-                Operational Visibility
-```
-
-Observability helps provide visibility into:
-
-- 📈 Cluster health
-- ☸️ Kubernetes workloads
-- 💻 Infrastructure performance
-- ❤️ Application health
-- 🚨 Alerts
-- 🔍 Troubleshooting
-- 📊 Operational metrics
+~~~text
+                         DEVELOPER
+                             │
+                             ▼
+                     GitHub Repository
+                             │
+                             ▼
+                    GitHub Actions CI/CD
+                             │
+          ┌──────────────────┼──────────────────┐
+          │                  │                  │
+          ▼                  ▼                  ▼
+     Terraform             Trivy             Checkov
+     Validation            Security          IaC Scan
+          │                  │                  │
+          └──────────────────┼──────────────────┘
+                             │
+                             ▼
+                       Docker Build
+                             │
+                             ▼
+                    Container Registry
+                             │
+                             ▼
+                           ArgoCD
+                             │
+                             ▼
+                         Amazon EKS
+                             │
+                  ┌──────────┴──────────┐
+                  ▼                     ▼
+             Application             RDS
+             Workloads             PostgreSQL
+                  │
+                  ▼
+        Prometheus + Alertmanager
+                  │
+                  ▼
+               Grafana
+                  │
+                  ▼
+          Operational Visibility
+                  │
+                  ▼
+        Multi-Region Disaster Recovery
+~~~
 
 ---
 
-## ♻️ **Disaster Recovery Workflow**
+# 🎯 Engineering Practices Demonstrated
 
-```text
-                    Production
-                    ap-south-1
-                         |
-                         v
-                 DR Automation
-                         |
-             +-----------+-----------+
-             |                       |
-             v                       v
-          Backup                 Recovery
-             |                       |
-             +-----------+-----------+
-                         |
-                         v
-                  ap-southeast-1
-                         |
-                         v
-                Recovery Platform
-```
-
-The DR architecture is designed to support:
-
-- 🔄 Recovery automation
-- 🌎 Regional resilience
-- 🏗️ Infrastructure recreation
-- 💾 Data recovery procedures
-- 🧪 DR validation
-- 📚 Recovery runbooks
-- 🚨 Business continuity
-
----
-
-## 📚 **Documentation**
-
-Project documentation is maintained under:
-
-```text
-docs/
-```
-
-Documentation can include:
-
-- 🏗️ Architecture documentation
-- 🚀 Deployment procedures
-- 🔐 Security documentation
-- 🧪 Testing procedures
-- ♻️ Disaster-recovery procedures
-- 🔧 Operational troubleshooting
-- 📚 Runbooks
-
----
-
-## 📋 **Project Highlights**
-
-### ☁️ **Cloud Infrastructure**
+### ☁️ Cloud Engineering
 
 - AWS
 - VPC
-- Multi-AZ networking
-- Public and private subnets
+- Multi-AZ architecture
 - Amazon EKS
-- Amazon RDS PostgreSQL
+- Amazon RDS
 - IAM
-- EC2
 
-### 🏗️ **Infrastructure Automation**
+### 🏗️ Infrastructure Engineering
 
 - Terraform
-- Reusable Terraform modules
+- Modular IaC
 - Environment separation
-- Infrastructure lifecycle management
-- Automated validation
 - Version-controlled infrastructure
+- Reproducible provisioning
 
-### ☸️ **Kubernetes Platform**
+### ☸️ Kubernetes Engineering
 
 - Amazon EKS
-- Kubernetes
 - Deployments
 - Services
 - ConfigMaps
 - Secrets
 - Ingress
-- Multi-AZ workloads
+- Workload management
 
-### 🐳 **Container Platform**
+### 🐳 Container Engineering
 
 - Docker
 - Container images
-- Container security
+- Container security scanning
 - Kubernetes integration
-- Automated image workflows
 
-### ⛵ **Application Delivery**
+### 🔄 GitOps Engineering
 
 - Helm
 - ArgoCD
-- GitOps
-- Declarative deployments
+- Declarative deployment
+- Desired-state management
 - Continuous synchronization
 
-### 🚀 **CI/CD**
+### 🚀 CI/CD Engineering
 
 - GitHub Actions
-- Continuous Integration
-- Continuous Delivery
-- Security gates
 - Automated validation
-- DR automation
+- Security gates
+- Container build
+- Continuous delivery
 
-### 🔐 **Security**
+### 🔐 DevSecOps Engineering
 
 - Trivy
 - Checkov
 - IAM
 - Security policies
-- Container scanning
-- IaC scanning
+- Container security
+- IaC security
 - Shift-left security
-- Least privilege
 
-### 📊 **Monitoring**
+### 📊 Observability Engineering
 
 - Prometheus
 - Alertmanager
 - Grafana
-- Kubernetes metrics
+- Kubernetes monitoring
 - Infrastructure metrics
 - Application observability
 
-### ♻️ **Disaster Recovery**
+### ♻️ Disaster Recovery Engineering
 
 - Multi-region architecture
-- Primary region: ap-south-1
-- DR region: ap-southeast-1
+- Primary region: `ap-south-1`
+- DR region: `ap-southeast-1`
 - Recovery automation
-- Business continuity
 - DR validation
 
 ---
 
-## 🎯 **Key Engineering Practices**
+# 🏆 What This Project Demonstrates
 
-This project demonstrates practical implementation of:
+This project demonstrates an integrated enterprise-style DevSecOps platform covering the complete infrastructure and application lifecycle:
 
-- ☁️ AWS cloud infrastructure automation
-- 🏗️ Modular Terraform Infrastructure as Code
-- 🌐 Multi-AZ architecture
-- ☸️ Amazon EKS
-- 🐳 Docker containerization
-- ⛵ Helm application packaging
-- 🔄 GitOps with ArgoCD
-- 🚀 GitHub Actions CI/CD
-- 🔐 DevSecOps security practices
-- 🔍 Trivy vulnerability scanning
-- 🛡️ Checkov IaC security validation
-- 📊 Prometheus monitoring
-- 📈 Grafana observability
-- 🗄️ Amazon RDS PostgreSQL
-- ♻️ Multi-region disaster recovery
-- 🧪 Automated testing and validation
-- 🌎 Environment separation
-- 📚 Infrastructure documentation
-- 🔧 Operational automation
-
-The platform follows a **separation-of-concerns architecture**, keeping infrastructure provisioning, application deployment, security, monitoring, GitOps, testing, and disaster recovery organized into dedicated repository components.
-
----
-
-## 🏆 **What This Project Demonstrates**
-
-### ☁️ **Cloud**
-
-- AWS
-- VPC
-- Multi-AZ Networking
-- Amazon EKS
-- Amazon RDS
-- IAM
-- EC2
-
-### 🏗️ **Infrastructure**
-
-- Terraform
-- Modular Infrastructure
-- Environment Separation
-- Infrastructure Lifecycle Management
-- Multi-AZ Architecture
-
-### ☸️ **Kubernetes**
-
-- Amazon EKS
-- Kubernetes Deployments
-- Services
-- ConfigMaps
-- Secrets
-- Ingress
-
-### 🐳 **Containers**
-
-- Docker
-- Container Images
-- Container Security
-- Kubernetes Integration
-
-### ⛵ **GitOps**
-
-- Helm
-- ArgoCD
-- GitOps
-- Declarative Deployments
-- Continuous Synchronization
-
-### 🚀 **CI/CD**
-
-- GitHub Actions
-- CI Validation
-- Continuous Delivery
-- Security Gates
-- Automated Deployment
-- DR Automation
-
-### 🔐 **Security**
-
-- Trivy
-- Checkov
-- IAM
-- Security Policies
-- Container Security
-- Infrastructure Security
-- Shift-left DevSecOps
-
-### 📊 **Monitoring**
-
-- Prometheus
-- Alertmanager
-- Grafana
-- Kubernetes Monitoring
-- Infrastructure Observability
-- Application Monitoring
-
-### ♻️ **Disaster Recovery**
-
-- Multi-Region Architecture
-- Active-Passive DR
-- Primary Region: ap-south-1
-- DR Region: ap-southeast-1
-- Recovery Automation
-- Business Continuity
-- Disaster-Recovery Validation
+~~~text
+Infrastructure as Code
+        │
+        ▼
+AWS Multi-AZ Infrastructure
+        │
+        ▼
+Amazon EKS
+        │
+        ▼
+Containerized Workloads
+        │
+        ▼
+GitOps Deployment
+        │
+        ▼
+DevSecOps Security
+        │
+        ▼
+Monitoring & Observability
+        │
+        ▼
+Multi-Region Disaster Recovery
+        │
+        ▼
+Production Resilience
+~~~
 
 ---
 
-## 🎯 **Project Objectives**
+# 📋 Production-Oriented Capabilities
 
-The main objectives of this project are:
-
-```text
-              Infrastructure as Code
-                       |
-                       v
-               Multi-AZ Infrastructure
-                       |
-                       v
-                  Amazon EKS
-                       |
-                       v
-             Containerized Workloads
-                       |
-                       v
-                 GitOps Delivery
-                       |
-                       v
-              DevSecOps Security
-                       |
-                       v
-            Monitoring & Observability
-                       |
-                       v
-             Multi-Region DR
-                       |
-                       v
-            Production Resilience
-```
-
-The overall platform is designed to make AWS infrastructure and application delivery:
-
-- 🔁 Repeatable
-- 🧩 Maintainable
-- 🔐 Secure
-- 📈 Scalable
-- 🚀 Automated
-- 🌎 Highly Available
-- ♻️ Resilient
-- 📊 Observable
-- 🛡️ Security-focused
+| Area | Implementation |
+|---|---|
+| High Availability | Multi-AZ |
+| Cloud Platform | AWS |
+| Infrastructure | Terraform |
+| Kubernetes | Amazon EKS |
+| Containers | Docker |
+| Application Packaging | Helm |
+| Deployment | ArgoCD |
+| CI/CD | GitHub Actions |
+| Container Security | Trivy |
+| IaC Security | Checkov |
+| Identity | AWS IAM |
+| Database | Amazon RDS PostgreSQL |
+| Monitoring | Prometheus |
+| Alerting | Alertmanager |
+| Visualization | Grafana |
+| Disaster Recovery | Multi-Region |
+| Environments | Dev / Staging / Production |
+| Validation | Automated Checks |
+| Configuration | Version Controlled |
+| Operations | Documentation / Runbooks |
 
 ---
 
-## 📄 **License**
+# 📚 Documentation
+
+Detailed project documentation can be maintained under:
+
+~~~text
+docs/
+~~~
+
+Recommended documentation areas include:
+
+- Architecture
+- Deployment
+- Security
+- Testing
+- Operations
+- Disaster Recovery
+- Runbooks
+
+The root README focuses on architecture, infrastructure, DevSecOps workflow, deployment, observability, and disaster recovery.
+
+---
+
+# 📄 License
 
 This project is licensed under the **MIT License**.
 
 See the [LICENSE](LICENSE) file for details.
 
-
-
-**AWS • Terraform • Kubernetes • Amazon EKS • Docker • Helm • ArgoCD • GitHub Actions • DevSecOps • Trivy • Checkov • Prometheus • Grafana • RDS • Disaster Recovery**
-
 ---
-
-### 🚀 **Build Secure. Deploy Continuously. Monitor Everything. Recover Reliably.**
