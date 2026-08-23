@@ -1,1 +1,18 @@
-# Production Ready Configuration
+apiVersion: aquasecurity.github.io/v1alpha1
+kind: VulnerabilityReport
+metadata:
+  name: production-placeholder
+  namespace: production
+  labels:
+    trivy-operator.resource.kind: Deployment
+    trivy-operator.resource.name: production-app
+report:
+  updateTimestamp: "1970-01-01T00:00:00Z"
+  artifact:
+    repository: production-app
+    tag: latest
+  scanner:
+    name: Trivy
+    vendor: Aqua Security
+    version: "0.0.0"
+  vulnerabilities: []

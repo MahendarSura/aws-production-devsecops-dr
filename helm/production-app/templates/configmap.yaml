@@ -1,1 +1,9 @@
-# Production Ready Configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "production-app.fullname" . }}-config
+  labels:
+    {{- include "production-app.labels" . | nindent 4 }}
+data:
+  APP_ENV: {{ .Values.env.APP_ENV | default "production" | quote }}
+  LOG_LEVEL: {{ .Values.env.LOG_LEVEL | default "info" | quote }}

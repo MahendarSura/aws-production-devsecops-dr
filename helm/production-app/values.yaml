@@ -19,3 +19,18 @@ autoscaling:
   minReplicas: 3
   maxReplicas: 10
   targetCPUUtilizationPercentage: 70
+
+ingress:
+  enabled: false
+  className: nginx
+  annotations: {}
+  hosts:
+    - host: production.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+env:
+  APP_ENV: production
+  LOG_LEVEL: info
