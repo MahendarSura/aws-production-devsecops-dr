@@ -1,0 +1,1 @@
+{"title": "Production Metrics", "refresh": "10s", "panels": [{"title": "CPU & Memory Utilization", "type": "timeseries"}, {"title": "HTTP 5xx Error Rate", "type": "timeseries"}]}
