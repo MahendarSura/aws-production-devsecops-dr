@@ -1,0 +1,6 @@
+framework:
+  - terraform
+  - kubernetes
+compact: true
+quiet: true
+soft-fail: false

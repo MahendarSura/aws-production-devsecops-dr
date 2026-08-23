@@ -1,0 +1,28 @@
+name: CI & Security Pipeline
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r docker/requirements.txt
+      - name: Lint Python
+        run: flake8 docker/app.py tests/test_app.py --max-line-length=120
+      - name: Run Unit Tests
+        run: pytest tests/test_app.py
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Validate Terraform
+        run: |
+          terraform -chdir=terraform fmt -check
+          terraform -chdir=terraform init -backend=false
+          terraform -chdir=terraform validate

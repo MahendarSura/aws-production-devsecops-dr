@@ -1,0 +1,13 @@
+groups:
+  - name: production-platform-alerts
+    rules:
+      - alert: HighPodCPUUsage
+        expr: sum(rate(container_cpu_usage_seconds_total{namespace="production"}[5m])) by (pod) > 0.8
+        for: 2m
+        labels:
+          severity: warning
+      - alert: PodCrashLooping
+        expr: rate(kube_pod_container_status_restarts_total{namespace="production"}[5m]) * 60 > 2
+        for: 1m
+        labels:
+          severity: critical
