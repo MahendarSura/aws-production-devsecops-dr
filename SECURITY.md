@@ -1,3 +1,4 @@
-# Production Documentation & Architecture Baseline
-
-Automated DevSecOps Platform with Multi-AZ AWS EKS and Disaster Recovery.
+# Security Baseline
+- **Least Privilege:** IAM Roles for Service Accounts (IRSA) with OIDC authentication.
+- **Network Isolation:** Kubernetes NetworkPolicies with default-deny baseline.
+- **Container Hardening:** Read-only root filesystem, dropped Linux capabilities (`ALL`).

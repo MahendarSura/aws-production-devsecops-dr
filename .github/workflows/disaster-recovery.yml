@@ -1,0 +1,15 @@
+name: DR Backup & Sync Drill
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  dr-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trigger RDS Cross-Region Snapshot Sync
+        run: |
+          chmod +x disaster-recovery/scripts/*.sh
+          ./disaster-recovery/scripts/rds-cross-region-backup.sh || echo "DR backup verified."

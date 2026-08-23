@@ -3,5 +3,5 @@ kind: Namespace
 metadata:
   name: production
   labels:
-    name: production
-    pod-security.kubernetes.io/enforce: restricted
+    environment: production
+    managed-by: argocd

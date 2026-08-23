@@ -1,9 +1,9 @@
 {
-  "annotations": { "list": [] },
-  "editable": true,
-  "id": null,
-  "panels": [],
-  "schemaVersion": 38,
-  "title": "DevSecOps Production Overview",
-  "uid": "devsecops-prod-overview"
+  "title": "AWS Production DevSecOps & DR Observability",
+  "refresh": "10s",
+  "panels": [
+    { "title": "Pod CPU & Memory Utilization", "type": "timeseries" },
+    { "title": "HTTP 5xx & 4xx Error Trends", "type": "timeseries" },
+    { "title": "Route 53 DNS Latency & Ingress Health", "type": "stat" }
+  ]
 }

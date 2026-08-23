@@ -1,6 +1,3 @@
 # Application Recovery Runbook
-
-- Scale workloads in DR Region:
-
-- Run post-failover health probe:
-
+- Scale pods: `kubectl scale deployment/production-app --replicas=5 -n production`
+- Verify rollout: `kubectl rollout status deployment/production-app -n production`

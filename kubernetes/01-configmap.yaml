@@ -6,3 +6,4 @@ metadata:
 data:
   APP_ENV: "production"
   AWS_REGION: "ap-south-1"
+  PORT: "8080"

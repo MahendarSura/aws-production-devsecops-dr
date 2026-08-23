@@ -1,27 +1,21 @@
-replicaCount: 2
+replicaCount: 3
 image:
   repository: ghcr.io/mahendarsura/aws-production-devsecops-dr
+  tag: latest
   pullPolicy: IfNotPresent
-  tag: "latest"
-serviceAccount:
-  create: true
-  name: "production-app-sa"
 service:
   type: ClusterIP
   port: 80
   targetPort: 8080
 resources:
-  limits:
-    cpu: 500m
-    memory: 256Mi
   requests:
     cpu: 100m
     memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
 autoscaling:
   enabled: true
-  minReplicas: 2
+  minReplicas: 3
   maxReplicas: 10
-  targetCPUUtilizationPercentage: 75
-env:
-  APP_ENV: "production"
-  AWS_REGION: "ap-south-1"
+  targetCPUUtilizationPercentage: 70

@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  production-api:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    container_name: devsecops-production-api
+    ports:
+      - "8080:8080"
+    environment:
+      - APP_ENV=production
+      - AWS_REGION=ap-south-1
+      - PORT=8080
+    restart: unless-stopped
