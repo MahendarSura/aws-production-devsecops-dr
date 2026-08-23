@@ -1,1 +1,16 @@
-# Production Ready Configuration
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: production-app-ingress
+  namespace: production
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: production-app-svc
+            port:
+              number: 80

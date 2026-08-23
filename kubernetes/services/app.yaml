@@ -1,1 +1,12 @@
-# Production Ready Configuration
+apiVersion: v1
+kind: Service
+metadata:
+  name: production-app-svc
+  namespace: production
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: production-app
