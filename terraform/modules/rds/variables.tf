@@ -1,11 +1,21 @@
 variable "project_name" {
   type    = string
-  default = "devsecops-dr-prod"
+  default = "devsecops-dr"
+}
+
+variable "environment" {
+  type    = string
+  default = "dev"
 }
 
 variable "db_name" {
   type    = string
   default = "appdb"
+}
+
+variable "db_username" {
+  type    = string
+  default = "dbadmin"
 }
 
 variable "db_instance_class" {
@@ -19,6 +29,11 @@ variable "vpc_id" {
 }
 
 variable "subnet_ids" {
+  type    = list(string)
+  default = []
+}
+
+variable "private_subnet_ids" {
   type    = list(string)
   default = []
 }

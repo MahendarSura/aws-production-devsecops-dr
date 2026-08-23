@@ -1,1 +1,4 @@
-module "staging" { source = "../../"; environment = "staging" }
+module "staging" {
+  source      = "../../"
+  environment = "staging"
+}

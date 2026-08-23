@@ -1,43 +1,54 @@
-variable "name" {
-  description = "Name prefix for VPC resources"
-  type        = string
+variable "project_name" {
+  type    = string
+  default = "devsecops-dr"
+}
+
+variable "environment" {
+  type    = string
+  default = "dev"
 }
 
 variable "vpc_cidr" {
-  description = "CIDR block for the VPC"
-  type        = string
-  default     = "10.20.0.0/16"
-}
-
-variable "public_subnet_cidrs" {
-  description = "CIDR blocks for public subnets"
-  type        = list(string)
-}
-
-variable "private_subnet_cidrs" {
-  description = "CIDR blocks for private subnets"
-  type        = list(string)
+  type    = string
+  default = "10.0.0.0/16"
 }
 
 variable "availability_zones" {
-  description = "Availability zones used by the VPC"
-  type        = list(string)
+  type    = list(string)
+  default = ["ap-south-1a", "ap-south-1b"]
 }
 
-variable "enable_nat_gateway" {
-  description = "Whether to create NAT gateways"
-  type        = bool
-  default     = true
+variable "single_nat_gateway" {
+  type    = bool
+  default = true
 }
 
-variable "allowed_ingress_cidrs" {
-  description = "CIDRs allowed to access HTTPS"
-  type        = list(string)
-  default     = ["0.0.0.0/0"]
+variable "name" {
+  type    = string
+  default = "devsecops-dr"
 }
 
 variable "tags" {
-  description = "Common AWS resource tags"
-  type        = map(string)
-  default     = {}
+  type    = map(string)
+  default = {}
+}
+
+variable "public_subnet_cidrs" {
+  type    = list(string)
+  default = ["10.0.1.0/24", "10.0.2.0/24"]
+}
+
+variable "private_subnet_cidrs" {
+  type    = list(string)
+  default = ["10.0.10.0/24", "10.0.20.0/24"]
+}
+
+variable "enable_nat_gateway" {
+  type    = bool
+  default = true
+}
+
+variable "allowed_ingress_cidrs" {
+  type    = list(string)
+  default = ["0.0.0.0/0"]
 }

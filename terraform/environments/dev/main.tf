@@ -1,1 +1,4 @@
-module "dev" { source = "../../"; environment = "dev" }
+module "dev" {
+  source      = "../../"
+  environment = "dev"
+}
