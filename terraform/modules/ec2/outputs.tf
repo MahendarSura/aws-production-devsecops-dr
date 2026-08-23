@@ -1,3 +1,24 @@
-# Production Terraform Configuration
-variable "project_name" { default = "devsecops-dr-prod" }
-output "status" { value = "configured" }
+output "instance_ids" {
+  description = "EC2 instance IDs"
+  value       = aws_instance.this[*].id
+}
+
+output "private_ips" {
+  description = "Private IP addresses"
+  value       = aws_instance.this[*].private_ip
+}
+
+output "security_group_id" {
+  description = "EC2 security group ID"
+  value       = aws_security_group.ec2.id
+}
+
+output "iam_role_name" {
+  description = "EC2 IAM role name"
+  value       = aws_iam_role.ec2.name
+}
+
+output "instance_profile_name" {
+  description = "EC2 instance profile name"
+  value       = aws_iam_instance_profile.ec2.name
+}
