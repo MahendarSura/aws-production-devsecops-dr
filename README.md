@@ -1458,13 +1458,7 @@ This project is licensed under the **MIT License**.
 
 See the [LICENSE](LICENSE) file for details.
 
----
 
-## ⭐ **Project**
-
-If you find this project useful, consider giving the repository a ⭐ and exploring the implementation.
-
-**Enterprise AWS Multi-AZ DevSecOps Platform & Disaster Recovery**
 
 **AWS • Terraform • Kubernetes • Amazon EKS • Docker • Helm • ArgoCD • GitHub Actions • DevSecOps • Trivy • Checkov • Prometheus • Grafana • RDS • Disaster Recovery**
 
